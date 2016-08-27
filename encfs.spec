@@ -4,7 +4,7 @@
 Summary: 	Encrypted pass-through filesystem for Linux
 Name:		encfs
 Version:	1.7.4
-Release:	5
+Release:	6
 License:	GPLv3+
 Group:		File tools
 Source0:	http://encfs.googlecode.com/files/%{name}-%{version}.tgz
@@ -34,7 +34,7 @@ Libraries for encfs.
 %setup -q -n %{name}-%{version}
 
 %build
-%configure2_5x --disable-rpath --with-boost-serialization=boost_serialization-mt --with-boost-system=boost_system-mt --with-boost-libdir=%{_libdir}
+%configure2_5x --disable-rpath --with-boost-libdir=%{_libdir}
 %make SED=/usr/bin/sed
 
 %install
