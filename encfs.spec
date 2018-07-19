@@ -1,17 +1,18 @@
-%define major	6
+%define major 6
 %define libname %mklibname %{name} %{major}
 
 Summary: 	Encrypted pass-through filesystem for Linux
 Name:		encfs
-Version:	1.7.4
-Release:	6
+Version:	1.9.5
+Release:	1
 License:	GPLv3+
 Group:		File tools
-Source0:	http://encfs.googlecode.com/files/%{name}-%{version}.tgz
-URL: 		http://www.arg0.net/encfs
+URL: 		https://github.com/vgough/encfs
+Source0:	https://github.com/vgough/encfs/releases/download/v%{version}/%{name}-%{version}.tar.gz
 Requires:	fuse >= 2.6
 Requires:	kmod(fuse)
 Requires:	openssl >= 0.9.7
+BuildRequires:	cmake
 BuildRequires:	rlog-devel >= 1.3
 BuildRequires:	fuse-devel >= 2.6
 BuildRequires:	openssl-devel >= 0.9.7
@@ -23,19 +24,19 @@ BuildRequires:	autoconf-archive
 EncFS implements an encrypted pass-through filesystem in userspace using
 FUSE. File names and contents are encrypted using OpenSSL.
 
-%package -n 	%{libname}
+%package -n %{libname}
 Summary:	Libraries for encfs
 Group:		System/Libraries
 
-%description -n	%{libname}
+%description -n %{libname}
 Libraries for encfs.
 
 %prep
 %setup -q -n %{name}-%{version}
+%cmake
 
 %build
-%configure2_5x --disable-rpath --with-boost-libdir=%{_libdir}
-%make SED=/usr/bin/sed
+%make
 
 %install
 %makeinstall_std
@@ -55,5 +56,3 @@ rm -f %{buildroot}%{_libdir}/libencfs.so
 
 %files -n %{libname}
 %{_libdir}/libencfs.so.%{major}*
-
-
