@@ -35,13 +35,13 @@ Libraries for encfs.
 %setup -q -n %{name}-%{version}
 %cmake -DUSE_INTERNAL_TINYXML=OFF \
       -DINSTALL_LIBENCFS=ON \
-      -DBUILD_SHARED_LIBS=ON \
+      -DBUILD_SHARED_LIBS=ON
 
 %build
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %find_lang %{name}
 
