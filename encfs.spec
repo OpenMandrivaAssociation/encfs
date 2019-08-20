@@ -9,13 +9,12 @@ License:	GPLv3+
 Group:		File tools
 URL: 		https://github.com/vgough/encfs
 Source0:	https://github.com/vgough/encfs/releases/download/v%{version}/%{name}-%{version}.tar.gz
-Requires:	fuse >= 2.6
-Requires:	kmod(fuse)
+Requires:	fuse2
 Requires:	openssl >= 0.9.7
 BuildRequires:	cmake
-BuildRequires:	rlog-devel >= 1.3
-BuildRequires:	fuse-devel >= 2.6
-BuildRequires:	openssl-devel >= 0.9.7
+BuildRequires:	pkgconfig(librlog)
+BuildRequires:	pkgconfig(fuse)
+BuildRequires:	pkgconfig(openssl)
 BuildRequires:	chrpath
 BuildRequires:	boost-devel >= 1.34
 BuildRequires:	autoconf-archive
@@ -33,7 +32,9 @@ Libraries for encfs.
 
 %prep
 %setup -q -n %{name}-%{version}
-%cmake
+%cmake -DUSE_INTERNAL_TINYXML=OFF \
+      -DINSTALL_LIBENCFS=ON \
+      -DBUILD_SHARED_LIBS=ON \
 
 %build
 %make
