@@ -52,7 +52,7 @@ rm -f %{buildroot}%{_libdir}/libencfs.la
 rm -f %{buildroot}%{_libdir}/libencfs.so
 
 %files -f %{name}.lang
-%doc README AUTHORS ChangeLog
+%doc AUTHORS ChangeLog
 %{_bindir}/*
 %{_mandir}/man?/*
 
