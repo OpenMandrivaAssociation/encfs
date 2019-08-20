@@ -38,10 +38,10 @@ Libraries for encfs.
       -DBUILD_SHARED_LIBS=ON
 
 %build
-%make_build
+%make_build -C build
 
 %install
-%make_install
+%make_install -C build
 
 %find_lang %{name}
 
