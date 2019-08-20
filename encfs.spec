@@ -1,4 +1,4 @@
-%define major 6
+%define major 1
 %define libname %mklibname %{name} %{major}
 
 Summary: 	Encrypted pass-through filesystem for Linux
@@ -9,13 +9,13 @@ License:	GPLv3+
 Group:		File tools
 URL: 		https://github.com/vgough/encfs
 Source0:	https://github.com/vgough/encfs/releases/download/v%{version}/%{name}-%{version}.tar.gz
-Requires:	fuse >= 2.6
-Requires:	kmod(fuse)
+Requires:	fuse2
 Requires:	openssl >= 0.9.7
 BuildRequires:	cmake
-BuildRequires:	rlog-devel >= 1.3
-BuildRequires:	fuse-devel >= 2.6
-BuildRequires:	openssl-devel >= 0.9.7
+BuildRequires:	pkgconfig(librlog)
+BuildRequires:	pkgconfig(fuse)
+BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(tinyxml2)
 BuildRequires:	chrpath
 BuildRequires:	boost-devel >= 1.34
 BuildRequires:	autoconf-archive
@@ -33,13 +33,15 @@ Libraries for encfs.
 
 %prep
 %setup -q -n %{name}-%{version}
-%cmake
+%cmake -DUSE_INTERNAL_TINYXML=OFF \
+      -DINSTALL_LIBENCFS=ON \
+      -DBUILD_SHARED_LIBS=ON
 
 %build
-%make
+%make_build -C build
 
 %install
-%makeinstall_std
+%make_install -C build
 
 %find_lang %{name}
 
@@ -50,7 +52,7 @@ rm -f %{buildroot}%{_libdir}/libencfs.la
 rm -f %{buildroot}%{_libdir}/libencfs.so
 
 %files -f %{name}.lang
-%doc README AUTHORS ChangeLog
+%doc AUTHORS ChangeLog
 %{_bindir}/*
 %{_mandir}/man?/*
 
