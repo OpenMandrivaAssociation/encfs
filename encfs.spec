@@ -15,6 +15,7 @@ BuildRequires:	cmake
 BuildRequires:	pkgconfig(librlog)
 BuildRequires:	pkgconfig(fuse)
 BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(tinyxml2)
 BuildRequires:	chrpath
 BuildRequires:	boost-devel >= 1.34
 BuildRequires:	autoconf-archive
