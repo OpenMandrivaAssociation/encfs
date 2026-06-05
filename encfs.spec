@@ -4,7 +4,7 @@
 Summary: 	Encrypted pass-through filesystem for Linux
 Name:		encfs
 Version:	1.9.5
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		File tools
 URL: 		https://github.com/vgough/encfs
